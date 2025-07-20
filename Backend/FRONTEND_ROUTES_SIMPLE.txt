@@ -1,0 +1,53 @@
+// 🎯 YOUR PERFECT FRONTEND ROUTES
+
+// =================================
+// 🔐 AUTHENTICATION (Required)
+// =================================
+POST http://localhost:5000/api/auth/register
+POST http://localhost:5000/api/auth/login
+
+// =================================
+// 📦 PRODUCT CRUD (Your Main Focus)
+// =================================
+GET    http://localhost:5000/api/products/all        // Show all products
+GET    http://localhost:5000/api/products/all/:id    // Show single product  
+POST   http://localhost:5000/api/products/add        // Add new product (admin)
+PUT    http://localhost:5000/api/products/update/:id // Edit product (admin)
+DELETE http://localhost:5000/api/products/delete/:id // Delete product (admin)
+
+// =================================
+// 🧾 ORDERS (Admin Panel Only)
+// =================================
+GET http://localhost:5000/api/orders/admin          // Show all orders in admin panel
+PUT http://localhost:5000/api/orders/:id            // Update order status (admin)
+
+// =================================
+// 🛒 CART (Optional - Only if you want shopping cart)
+// =================================
+POST   http://localhost:5000/api/cart/              // Add to cart
+GET    http://localhost:5000/api/cart/              // View cart
+PUT    http://localhost:5000/api/cart/:id           // Update cart quantity  
+DELETE http://localhost:5000/api/cart/:id           // Remove from cart
+
+// =================================
+// 📱 FRONTEND PAGES YOU NEED:
+// =================================
+
+// 🔑 Authentication Pages:
+// - Login page → POST /api/auth/login
+// - Register page → POST /api/auth/register
+
+// 📦 Product Management (Admin):
+// - Products list page → GET /api/products/all
+// - Add product page → POST /api/products/add  
+// - Edit product page → PUT /api/products/update/:id
+// - Delete product → DELETE /api/products/delete/:id
+
+// 🧾 Admin Panel:
+// - Orders page → GET /api/orders/admin
+// - Update order status → PUT /api/orders/:id
+
+// 🛒 Shopping (Optional):
+// - Product catalog (public) → GET /api/products/all
+// - Add to cart → POST /api/cart/
+// - Cart page → GET /api/cart/
