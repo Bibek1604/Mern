@@ -36,7 +36,7 @@ const About = () => {
         <section className="py-20 bg-gradient-hero">
           <div className="container mx-auto px-4 text-center">
             <h1 className="text-4xl lg:text-6xl font-bold text-charcoal mb-6 animate-fade-in">
-              About Gina Sanchez
+              About Ghar Sansar
             </h1>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed animate-slide-up">
               We're passionate about transforming spaces with carefully curated home decor 
@@ -55,7 +55,7 @@ const About = () => {
                   Our Story
                 </h2>
                 <p className="text-muted-foreground leading-relaxed">
-                  Founded in 2020, Gina Sanchez started as a small passion project to bring 
+                  Founded in 2020, Ghar Sansar started as a small passion project to bring 
                   beautiful, affordable home decor to everyone. What began in a small studio 
                   has grown into a trusted brand that serves thousands of customers worldwide.
                 </p>

@@ -43,7 +43,7 @@ const Header = () => {
           to="/"
           className="text-3xl font-extrabold tracking-tight text-gray-900 hover:text-blue-600 transition duration-300"
         >
-          Gina Sanchez
+          Ghar Sansar
         </Link>
 
         {/* Navigation */}

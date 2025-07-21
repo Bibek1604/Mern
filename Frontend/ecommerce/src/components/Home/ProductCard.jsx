@@ -57,20 +57,6 @@ const ProductCard = ({ name, title, price, image, category, isNew, rating }) => 
             />
           </button>
         </div>
-
-        {/* Add to Cart Overlay */}
-        <div className={`absolute inset-x-0 bottom-0 bg-gradient-to-t from-gray-900/80 to-transparent p-4 transition-transform duration-300 ${
-          isHovered ? "translate-y-0" : "translate-y-full"
-        }`}>
-          <button 
-            className="w-full bg-gray-900 hover:bg-gray-800 text-gray-100 px-4 py-2 rounded-lg font-medium flex items-center justify-center transition-colors duration-300 shadow-sm"
-          >
-            <ShoppingBag className="w-4 h-4 mr-2" />
-            Add to Cart
-          </button>
-        </div>
-      </div>
-
       {/* Product Info */}
       <div className="p-4">
         {category && (
@@ -105,6 +91,7 @@ const ProductCard = ({ name, title, price, image, category, isNew, rating }) => 
           {formatPrice(price)}
         </p>
       </div>
+    </div>
     </div>
   );
 };

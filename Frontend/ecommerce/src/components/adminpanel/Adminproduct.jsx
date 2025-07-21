@@ -1,7 +1,6 @@
-// src/components/adminpanel/AdminProduct.jsx
 import React, { useEffect, useState } from "react";
-import Sidebar from "./AdminSidebar"; // Sidebar component
-import { useProductStore } from "../../store"; // Your Zustand product store
+import Sidebar from "./AdminSidebar";
+import { useProductStore } from "../../store";
 
 const AdminProduct = () => {
   const {
@@ -37,7 +36,7 @@ const AdminProduct = () => {
     const file = e.target.files[0];
     const reader = new FileReader();
     reader.onloadend = () => {
-      setForm({ ...form, image: reader.result }); // base64 string
+      setForm({ ...form, image: reader.result });
     };
     if (file) {
       reader.readAsDataURL(file);
@@ -64,7 +63,7 @@ const AdminProduct = () => {
       await createProduct(form);
     }
     resetForm();
-    getAllProducts(); // Refresh list
+    getAllProducts();
   };
 
   const handleEdit = (product) => {
@@ -74,103 +73,133 @@ const AdminProduct = () => {
 
   const handleDelete = async (id) => {
     await deleteProduct(id);
-    getAllProducts(); // Refresh list
+    getAllProducts();
   };
 
   return (
-    <div className="flex min-h-screen">
+    <div className="flex min-h-screen bg-white">
       <Sidebar />
-      <div className="flex-1 bg-gray-100 p-6 ml-64">
-        <h1 className="text-2xl font-semibold mb-4">Manage Products</h1>
+      <div className="flex-1 ml-64 p-8">
+        <div className="max-w-4xl mx-auto">
+          <h1 className="text-3xl font-bold text-gray-800 mb-6">Manage Products</h1>
 
-        {error && (
-          <p className="text-red-500 mb-4">
-            Error: {error}
-          </p>
-        )}
+          {error && (
+            <div className="mb-6 p-4 bg-red-100 text-red-700 rounded-lg">
+              Error: {error}
+            </div>
+          )}
 
-        <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4 mb-6">
-          {["title", "description", "price", "category", "rating"].map((field) => (
-            <input
-              key={field}
-              type="text"
-              name={field}
-              placeholder={field}
-              value={form[field]}
-              onChange={handleChange}
-              className="p-2 border rounded"
-              required
-            />
-          ))}
-
-          {/* File Upload */}
-          <input
-            type="file"
-            accept="image/*"
-            onChange={handleImageUpload}
-            className="col-span-2"
-          />
-
-          <button
-            type="submit"
-            className="col-span-2 bg-blue-600 text-white p-2 rounded hover:bg-blue-700"
-            disabled={isLoading}
-          >
-            {editingId ? "Update Product" : "Add Product"}
-          </button>
-        </form>
-
-        <table className="w-full border text-sm">
-          <thead>
-            <tr className="bg-gray-200">
-              <th className="p-2 border">Title</th>
-              <th className="p-2 border">Price</th>
-              <th className="p-2 border">Category</th>
-              <th className="p-2 border">Rating</th>
-              <th className="p-2 border">Image</th>
-              <th className="p-2 border">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {products.map((p) => (
-              <tr key={p._id || p.id} className="text-center">
-                <td className="p-2 border">{p.title}</td>
-                <td className="p-2 border">${p.price}</td>
-                <td className="p-2 border">{p.category}</td>
-                <td className="p-2 border">{p.rating}</td>
-                <td className="p-2 border">
-                  <img
-                    src={p.image}
-                    alt={p.title}
-                    className="h-10 w-10 object-cover mx-auto"
+          {/* Form Section */}
+          <div className="bg-white shadow-lg rounded-lg p-6 mb-8">
+            <h2 className="text-xl font-semibold text-gray-700 mb-4">
+              {editingId ? "Update Product" : "Add New Product"}
+            </h2>
+            <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {[
+                { name: "title", type: "text", placeholder: "Product Title" },
+                { name: "description", type: "text", placeholder: "Description" },
+                { name: "price", type: "number", placeholder: "Price", step: "0.01" },
+                { name: "category", type: "text", placeholder: "Category" },
+                { name: "rating", type: "number", placeholder: "Rating", step: "0.1" },
+              ].map((field) => (
+                <div key={field.name} className="flex flex-col">
+                  <label className="text-sm font-medium text-gray-600 mb-1 capitalize">{field.name}</label>
+                  <input
+                    type={field.type}
+                    name={field.name}
+                    placeholder={field.placeholder}
+                    value={form[field.name]}
+                    onChange={handleChange}
+                    className="p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    required
                   />
-                </td>
-                <td className="p-2 border space-x-2">
+                </div>
+              ))}
+              <div className="col-span-1 md:col-span-2">
+                <label className="text-sm font-medium text-gray-600 mb-1">Product Image</label>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageUpload}
+                  className="w-full p-2 border border-gray-300 rounded-lg"
+                />
+              </div>
+              <div className="col-span-1 md:col-span-2 flex gap-4">
+                <button
+                  type="submit"
+                  className="w-full md:w-auto px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:bg-blue-300"
+                  disabled={isLoading}
+                >
+                  {editingId ? "Update Product" : "Add Product"}
+                </button>
+                {editingId && (
                   <button
-                    onClick={() => handleEdit(p)}
-                    className="bg-yellow-500 text-white px-2 py-1 rounded"
+                    type="button"
+                    onClick={resetForm}
+                    className="w-full md:w-auto px-6 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors"
                   >
-                    Edit
+                    Cancel
                   </button>
-                  <button
-                    onClick={() => handleDelete(p._id || p.id)}
-                    className="bg-red-600 text-white px-2 py-1 rounded"
-                    disabled={isLoading}
-                  >
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            ))}
-            {products.length === 0 && (
-              <tr>
-                <td colSpan="6" className="text-center p-4">
-                  No products found.
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+                )}
+              </div>
+            </form>
+          </div>
+
+          {/* Table Section */}
+          <div className="bg-white shadow-lg rounded-lg overflow-hidden">
+            <table className="w-full text-sm text-gray-700">
+              <thead>
+                <tr className="bg-gray-50 text-left">
+                  <th className="p-4 font-semibold">Title</th>
+                  <th className="p-4 font-semibold">Price</th>
+                  <th className="p-4 font-semibold">Category</th>
+                  <th className="p-4 font-semibold">Rating</th>
+                  <th className="p-4 font-semibold">Image</th>
+                  <th className="p-4 font-semibold">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {products.map((p) => (
+                  <tr key={p._id || p.id} className="border-t hover:bg-gray-50">
+                    <td className="p-4">{p.title}</td>
+                    <td className="p-4">${parseFloat(p.price).toFixed(2)}</td>
+                    <td className="p-4">{p.category}</td>
+                    <td className="p-4">{p.rating}</td>
+                    <td className="p-4">
+                      <img
+                        src={p.image}
+                        alt={p.title}
+                        className="h-12 w-12 object-cover rounded"
+                      />
+                    </td>
+                    <td className="p-4 space-x-2">
+                      <button
+                        onClick={() => handleEdit(p)}
+                        className="px-3 py-1 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition-colors"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        onClick={() => handleDelete(p._id || p.id)}
+                        className="px-3 py-1 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+                        disabled={isLoading}
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+                {products.length === 0 && (
+                  <tr>
+                    <td colSpan="6" className="text-center p-6 text-gray-500">
+                      No products found.
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
   );

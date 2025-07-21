@@ -17,7 +17,7 @@ const Footer = () => {
           <div className="md:col-span-2 space-y-6">
             <div className="space-y-4">
               <h2 className="text-3xl font-bold text-gray-900 tracking-tight">
-                Gina Sanchez
+                Ghar Sansar
               </h2>
               <p className="text-gray-600 leading-relaxed max-w-md">
                 Transform your space with our curated collection of premium home decor, 
@@ -108,7 +108,7 @@ const Footer = () => {
         <div className="pt-8 border-t border-taupe">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-sm text-muted-foreground">
-              &copy; {new Date().getFullYear()} Gina Sanchez. All rights reserved.
+              &copy; {new Date().getFullYear()} Ghar Sansar. All rights reserved.
             </p>
             
             <div className="flex space-x-6 text-sm text-muted-foreground">
