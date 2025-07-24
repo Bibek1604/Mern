@@ -1,11 +1,8 @@
-// File: backend/server.js
 
 const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const sequelize = require('./config/db');
-
-// Route imports
 const authRoutes = require('./routes/authRoutes');
 const productRoutes = require('./routes/productRoutes');
 const cartRoutes = require('./routes/cartRoutes');
@@ -14,31 +11,29 @@ const orderRoutes = require('./routes/orderRoutes');
 dotenv.config();
 const app = express();
 
-// ✅ CORS Configuration - Fix CORS errors
+
 const corsOptions = {
   origin: [
     'http://localhost:3000', 
     'http://localhost:3001', 
     'http://localhost:5173', 
     'http://localhost:5174',
-    'http://localhost:5175', // Added your Vite port
+    'http://localhost:5175', 
     'http://localhost:5176',
     'http://127.0.0.1:3000', 
-    'http://127.0.0.1:5173',
-    'http://127.0.0.1:5175' // Added your Vite port
+
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'Origin', 'X-Requested-With'],
   credentials: true,
-  optionsSuccessStatus: 200 // For legacy browser support
+  optionsSuccessStatus: 200 
 };
 
 app.use(cors(corsOptions));
-app.use(express.json({ limit: '50mb' })); // Increased limit for image data
-app.use(express.urlencoded({ limit: '50mb', extended: true })); // For form data
+app.use(express.json({ limit: '50mb' })); 
+app.use(express.urlencoded({ limit: '50mb', extended: true })); 
 
-// ✅ Serve static files (images)
-app.use('/uploads', express.static('uploads')); // Serve images from uploads folder
+app.use('/uploads', express.static('uploads')); 
 
 // ✅ API Routes
 app.use('/api/auth', authRoutes);

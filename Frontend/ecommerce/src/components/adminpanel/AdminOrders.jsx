@@ -26,9 +26,6 @@ const AdminOrders = () => {
   }, []);
 
   return (
-    <div className="flex min-h-screen bg-white">
-      <Sidebar />
-      <div className="flex-1 ml-64 p-8">
         <div className="max-w-5xl mx-auto">
           <h1 className="text-3xl font-bold text-gray-800 mb-6">All Orders</h1>
 
@@ -92,8 +89,7 @@ const AdminOrders = () => {
             </div>
           )}
         </div>
-      </div>
-    </div>
+
   );
 };
 

@@ -10,23 +10,24 @@ const AdminLogin = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  // Redirect if already logged in
   useEffect(() => {
     if (isAdmin && token) {
       navigate("/admin/dashboard", { replace: true });
     }
-  }, [isAdmin, token, navigate]);
+  }, [isAdmin, token]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (username === "admin" && password === "admin123") {
-      loginAdmin("admin-token-123");
-      setError("");
-      // You can also navigate here, but since useEffect will run, it's optional:
-      // navigate("/admin/dashboard", { replace: true });
+    const ADMIN_USERNAME = "admin";
+    const ADMIN_PASSWORD = "admin123";
+    const DUMMY_TOKEN = "secure-admin-token";
+
+    if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+      loginAdmin(DUMMY_TOKEN);
+      navigate("/admin/dashboard", { replace: true });
     } else {
-      setError("Invalid admin credentials");
+      setError("Invalid credentials");
     }
   };
 
@@ -40,7 +41,7 @@ const AdminLogin = () => {
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           required
-          className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full px-4 py-2 border rounded"
         />
         <input
           type="password"
@@ -48,12 +49,12 @@ const AdminLogin = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
-          className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full px-4 py-2 border rounded"
         />
         {error && <p className="text-red-600 text-sm">{error}</p>}
         <button
           type="submit"
-          className="w-full py-2 bg-blue-600 text-white font-semibold rounded hover:bg-blue-700 transition"
+          className="w-full py-2 bg-blue-600 text-white rounded"
         >
           Login
         </button>

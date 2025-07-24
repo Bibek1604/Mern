@@ -1,8 +1,6 @@
-// controllers/orderController.js
 const Order = require('../models/Order');
 const { v4: uuidv4 } = require('uuid');
 
-// 📦 Place a new order
 exports.placeOrder = async (req, res) => {
   try {
     const {
@@ -13,16 +11,15 @@ exports.placeOrder = async (req, res) => {
       paymentMethod,
       items,
       total,
-      userId, // optional
+      userId, 
     } = req.body;
 
-    // ✅ Validate required fields
     if (!customerName || !customerEmail || !contactNumber || !shippingAddress || !paymentMethod || !items || !total) {
       return res.status(400).json({ error: 'All fields are required.' });
     }
 
     const order = await Order.create({
-      orderNumber: `ORD-${uuidv4().split('-')[0]}`, // simple order number
+      orderNumber: `ORD-${uuidv4().split('-')[0]}`, 
       customerName,
       customerEmail,
       contactNumber,

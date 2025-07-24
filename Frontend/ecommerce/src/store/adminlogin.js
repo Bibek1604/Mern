@@ -8,6 +8,7 @@ const useAdminlogin = create((set) => ({
     localStorage.setItem("adminToken", token);
     set({ token, isAdmin: true });
   },
+
   logoutAdmin: () => {
     localStorage.removeItem("adminToken");
     set({ token: null, isAdmin: false });

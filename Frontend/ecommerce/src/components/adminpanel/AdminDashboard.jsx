@@ -1,23 +1,12 @@
-// src/pages/AdminDashboard.jsx
-import { Routes, Route, Navigate } from "react-router-dom";
-import Sidebar from "../adminpanel/AdminSidebar";
-import AdminProduct from "../adminpanel/Adminproduct";
-import AdminOrders from "../adminpanel/AdminOrders";
+// AdminDashboard.jsx
 import React from "react";
-import Footer from "../Home/Footer";
-import Header from "../Home/Header";
 
 const AdminDashboard = () => {
   return (
-    <><Header /><div className="flex min-h-screen">
-          <Sidebar />
-          <div className="flex-1 bg-gray-100 p-6">
-              <Routes>
-                  <Route path="products" element={<AdminProduct />} />
-                  <Route path="orders" element={<AdminOrders />} />
-              </Routes>
-          </div>
-      </div><Footer /></>
+    <div>
+      <h1 className="text-3xl font-bold mb-4">Welcome to Admin Dashboard</h1>
+      <p className="text-gray-600">Use the sidebar to manage your store.</p>
+    </div>
   );
 };
 
